@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js"></script>
+</head>
+<body>
+
+    <style>
+
+        #the-canvas {
+
+            border:solid 1px;
+
+        }
+
+    </style>
+
+    <div class="canvas-container">
+
+        <canvas id="the-canvas"></canvas>
+
+    </div>
+    <div class="contenedor-navegacion">
+
+        <button id="prev">Anterior</button>
+        <input id="current_page" value=1 type="number"/>
+        <button id="next">Siguiente</button>
+
+    </div>
+    <div class="contenedor-zoom">
+
+        <button id="in">Acercar</button>
+        <button id="out">Alejar</button>
+    </div>
+
+    <script>
+
+        var documento = "./assets/fabio.pdf";
+        var pdf = null;
+        var page = null;
+
+        var miArchivo  = { 
+            pdf : null,
+            currentPage:  1,
+            zoom :1,
+        }
+        
+        //lamar al documento
+        pdfjsLib.getDocument(documento).then((pdf) => {
+
+           // console.log(pdf);
+        });
+
+
+        miArchivo.pdf = pdf;
+        
+        function render() {
+           miArchivo.pdf.getPage(miArchivo.currentPage).then((page) => {
+ 
+            });
+        }
+
+        var  canvas = document.getElementById("the-canvas");
+        var ctx = canvas.getContext('2d');
+        //var viewport = page.getViewport(miArchivo.zoom);
+
+
+        //cambiar tamaño del viewport donde se muestra el documento
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        //mostrar pdf
+        page.render({
+
+            canvasContext: ctx,
+            viewport: viewport
+
+
+        });
+       
+    </script>
+ 
+
+</body>
+
+</html>

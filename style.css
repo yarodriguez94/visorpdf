@@ -1,0 +1,122 @@
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+
+}
+.container {
+
+    display:flex;
+    flex-flow:column nowrap;
+
+}
+.container-botones{
+
+    margin-top:1rem;
+    
+}
+.container-canvas{
+
+    width:100%;
+    height:auto;
+    margin:auto;
+    /*background-color: rgba(61, 212, 137, 0.5);
+    z-index:1;*/
+
+}
+    
+    #the-canvas {
+                
+        border:solid 1px  purple;
+           
+    }
+
+
+body {
+    
+    text-align:center;
+
+}
+
+.container-elemento{
+
+    width:130px;
+    height:100%;
+    border:solid 1px black;
+    background-color:blueviolet;
+    position: fixed;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+    .container-elemento-arrastrar{
+
+        width:50px;
+        height:50px;
+        background-color:blue;
+        z-index:1;
+
+
+    }
+.canvas{
+
+    /*background-color: rgba(150, 100,50, .5);
+    z-index:10;*/
+
+}
+
+.arrastrar {
+
+    position: fixed;
+
+}
+
+.caja{
+
+    width:200px;
+    height:100px;
+    background-color:blue;
+
+}
+/*
+.firma {
+
+    width: 100px;
+    height:100%;
+    border:solid 1px;
+    position: fixed;
+    background-color:blueviolet;
+    /*display:flex;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    float:left;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    margin-top:0px;
+    z-index: 1;
+    
+
+}
+.container-firma-elemento {
+
+    width:80%;
+    height: 25px;
+    background-color: darkblue;
+        
+
+}
+
+.container-destino-firma{
+
+    width:100px;
+    height: 50px;
+    border:solid 1px;
+    background-color: blueviolet;
+    z-index: 1;
+
+}
+*/

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+	<!--<script src="<?php echo sc_url_library('prj', 'pdfjs','build/pdf.js'); ?>"> </script>-->
+	<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+
+	<div class="container">
+	
+		<div class="container-botones">
+			
+			<button id="prev">Anterior</button>
+			<button id="next">Siguiente</button>
+			<span>Página: <span id="page_num"></span> / <span id="page_count"></span></span>
+					
+		</div>
+
+			<!--
+		<div id="elemento-contenedor" class="container-elemento">
+			
+			<div id="elemento-arrastrar" class="container-elemento-arrastrar" draggable="true"></div>
+		
+		</div>
+
+	
+		<div id="elemento-arrastrar" class="firma" >
+
+			<div id="elemento-prueba" class=" firma container-firma-elemento" draggable="true"></div>
+			
+		</div>
+
+			<div id="elemento-soltar" class="firma">
+			
+		</div> -->
+			
+		<div  id="elemento-soltar" class="container-canvas">
+			
+				<canvas id="the-canvas" class="canvas" width="900" height="650"></canvas>
+
+			<canvas id="elementoArrastrar" class="arrastrar"> </canvas>
+
+		</div>
+	</div>
+
+	<script src="script2.js"></script>
+	
+</body>
+</html>
