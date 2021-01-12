@@ -2,7 +2,7 @@
 
 function hacerPdf (){
   //variable con ruta del archivo
-  var url = './assets/fabio.pdf';
+  var url = './assets/anexo.pdf';
 
   //Cargar script,  para acceder  al archivo de PDF.js.
   pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
@@ -66,9 +66,7 @@ function hacerPdf (){
   renderPage(pageNum);
   });
 }
-
-hacerPdf();
-    
+ hacerPdf();   
 //////DIBUJAR EN EL CANVAS///////
 
 var canvas = document.getElementById("the-canvas");
@@ -86,7 +84,7 @@ function pintarElemento(valorX,valorY){
   //hacerPdf();
   //ctx.fillStyle = 'white';
   //ctx.fillStyle = 'rgba(253,254,254,0.1)';
-  //ctx.fillRect(0,0,500,500);
+  //ctx.fillRect(10,10,500,500);
   //ctx.globalAlpha = 0.2;
   //ctx.clearRect(0,0, canvas.width,canvas.height);
   
@@ -99,14 +97,15 @@ function pintarElemento(valorX,valorY){
 //parametros del objeto a pintar 
 elemento = ({
 
-  x:15,
-  y:15,
+  x:150,
+  y:250,
   widht:100,
   height:100,
   color:'red'
 
 });
 
+//elemento.color= 'black';
 
 //llamar a la funcion para pintar el objeto
 pintarElemento();
@@ -126,6 +125,8 @@ pintarElemento();
   };
 
  }
+
+ //console.log(elemento.y);
  
  //funcion para escuchar cuando se haga clic sobre el canvas
 
@@ -144,6 +145,9 @@ pintarElemento();
       posicionY = mousePos.y - elemento.y;
   
    }
+   
+   elemento.x = mousePos.x;
+   elemento.y = mousePos.y;
    pintarElemento();
  });
 
@@ -153,6 +157,7 @@ function pintarElementoMouse (){
   
   canvas.addEventListener("mousemove", function(e){
 
+  
   if(elementoActual !=null){
 
     var mousePos = onMousePos(canvas, e);  
@@ -160,19 +165,20 @@ function pintarElementoMouse (){
     elementoActual.x = mousePos.x - posicionX;
     elementoActual.y = mousePos.y - posicionY;
     
-    pintarElemento();
-  }
-  
+    //pintarElemento();
+   }
+ 
     
  });
 }
-
-pintarElementoMouse();
+//pintarElementoMouse();
 
 //funcion al levantar el clic del mouse
 canvas.addEventListener("mouseup", ()=>{
 
   elementoActual = null;
+  //hacerPdf();
+  //pintarElemento();
 
 })
 
