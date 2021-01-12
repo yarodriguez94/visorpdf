@@ -67,6 +67,7 @@ function hacerPdf (){
   });
 }
  hacerPdf();   
+
 //////DIBUJAR EN EL CANVAS///////
 
 var canvas = document.getElementById("the-canvas");
@@ -88,9 +89,11 @@ function pintarElemento(valorX,valorY){
   //ctx.globalAlpha = 0.2;
   //ctx.clearRect(0,0, canvas.width,canvas.height);
   
-  ctx.fillStyle =elemento.color;
+  ctx.fillStyle = elemento.color;
+  ctx.lineWidth = elemento.anchoBorde;
+  ctx.strokeStyle = elemento.borde;
   ctx.fillRect(elemento.x, elemento.y,elemento.widht,elemento.height);
-  
+  ctx.strokeRect(elemento.x, elemento.y,elemento.widht,elemento.height)
   
 };
 
@@ -101,7 +104,9 @@ elemento = ({
   y:250,
   widht:100,
   height:100,
-  color:'red'
+  color:'red',
+  borde:'rgba( 161, 167, 167 ,0.2)',
+  anchoBorde :2
 
 });
 
@@ -146,8 +151,8 @@ pintarElemento();
   
    }
    
-   elemento.x = mousePos.x;
-   elemento.y = mousePos.y;
+   //elemento.x = mousePos.x;
+   //elemento.y = mousePos.y;
    pintarElemento();
  });
 
@@ -166,155 +171,25 @@ function pintarElementoMouse (){
     elementoActual.y = mousePos.y - posicionY;
     
     //pintarElemento();
+    elementoActual.color = 'rgba(255, 255,255, 0.0)';
    }
  
+   pintarElemento();
     
  });
 }
-//pintarElementoMouse();
+pintarElementoMouse();
 
 //funcion al levantar el clic del mouse
 canvas.addEventListener("mouseup", ()=>{
 
   elementoActual = null;
-  //hacerPdf();
-  //pintarElemento();
-
+  console.log('este es el valor del elementoActual' + elementoActual + 'y este es el valor del elemento inicial' + elemento );
+  elemento.color = 'blue';
+  console.log ('El valor de Y' + ' ' + elemento.y + ' ' +  'el valor de x' + ' ' + elemento.x);
+  
+  hacerPdf();
+ 
 })
 
- /* 
-  var mousePos = onMousePos(canvas, e);
-  console.log(mousePos);
-
-    elementDraw ({
-      x:10,
-      y:20,} ,ctx);
-
-         //evaluar si el mouse se encuentra sobre el canvas 
-      if (ctx.isPointInPath(mousePos.x, mousePos.y)) {
-        arrastrar = true;
-        delta.x = X - mousePos.x;
-        delta.y = Y - mousePos.y;
-      }*/
-   
- //});
-
- 
- //funcion para escuchar cuando el mouse se mueva dentro del canvas
-/*
-canvas.addEventListener("mousemove", function(e){
-
-  //console.log("se esta moviendo el mouse dentro del recuadro");
-  //var mousePos = onMousePos(canvas, e);
-
-  if (elementoActual !=null) {
-
-    elementoActual.x = e.clientX;
-    elementoActual = e.clientY;
-  }
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
-   
-
-
-}, false);
-
- //funcion para escuchar cuando se levante el clic del mouse
-
- canvas.addEventListener("mouseup",function(e){
-
-  arrastrar =  false;
-
- }, false );
-
-*/
-
-
- /*
- var caja = document.getElementById('cajaPrueba');
-
- caja.addEventListener('mousemove', () => {
-  
-  console.log("Esta moviendo el mouse sobre el elemento");
-
- });
- 
- var canvas = document.getElementById('the-canvas');
- canvas.addEventListener('mousemove',()=>{
-
-  console.log("Se esta moviendo sobre el elemento canvas");
-
- }) */
-
- //////////////////////////////
-
-/*
-var canvas = document.getElementById("the-canvas");
-if (canvas && canvas.getContext) {
-  var ctx = canvas.getContext("2d");
-  if (ctx) {
-    var arrastrar = false;
-    var delta = new Object();
-    var L = 5;
-    var paso = 2;
-    var R = 100;
-    var X = canvas.width / 2;
-    var Y = canvas.height / 2;
-
-    function dibujarUnaEstrella(R, L, paso, X, Y) {
-
-      ctx.fillStyle = "#6ab150";
-      var estrella = L / paso
-      var rad = (2 * Math.PI) / estrella;
-
-      ctx.beginPath();
-      for (var i = 0; i < L; i++) {
-        x = X + R * Math.cos(rad * i);
-        y = Y + R * Math.sin(rad * i);
-        ctx.lineTo(x, y);
-      }
-      ctx.closePath();
-      ctx.fill();
-    }
-
-    dibujarUnaEstrella(R, L, paso, X, Y);
-
-    function oMousePos(canvas, evt) {
-      var rect = canvas.getBoundingClientRect();
-      return { // devuelve un objeto
-        x: Math.round(evt.clientX - rect.left),
-        y: Math.round(evt.clientY - rect.top)
-      };
-    }
-
-    canvas.addEventListener("mousedown", function(evt) {
-      var mousePos = oMousePos(canvas, evt);
-
-      console.log("Se ha echo clic sobre el elemento");
-
-      dibujarUnaEstrella(R, L, paso, X, Y);
-      if (ctx.isPointInPath(mousePos.x, mousePos.y)) {
-        arrastrar = true;
-        delta.x = X - mousePos.x;
-        delta.y = Y - mousePos.y;
-      }
-    }, false);
-
-    canvas.addEventListener("mousemove", function(evt) {
-      var mousePos = oMousePos(canvas, evt);
-
-      console.log("Se esta movienod sobre el elemento dentro del canvasa")
-
-      if (arrastrar) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        X = mousePos.x + delta.x, Y = mousePos.y + delta.y
-
-        dibujarUnaEstrella(R, L, paso, X, Y);
-      }
-    }, false);
-
-    canvas.addEventListener("mouseup", function(evt) {
-      arrastrar = false;
-    }, false);
-  }
-}
-*/
+window.onload = pintarElemento();
