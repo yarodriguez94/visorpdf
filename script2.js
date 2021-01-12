@@ -2,9 +2,9 @@
 
 function hacerPdf (){
   //variable con ruta del archivo
-  var url = './assets/anexo.pdf';
+  var url = './assets/fabio.pdf';
 
-  //Cargar script,  para acceder  al archivo de PDF.js.
+  //Cargar script para acceder  al archivo de PDF.js.
   pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
   //crear las variables de entorno para rendereizar el archivo pdf asi como la paginacion
@@ -55,6 +55,43 @@ function hacerPdf (){
     document.getElementById('page_num').textContent = num;
   }
 
+  //poder visualizar las demas paginas
+
+  
+		function queueRenderPage(num) {
+		  if (pageRendering) {
+			pageNumPending = num;
+		  } else {
+			renderPage(num);
+		  }
+		}
+	
+	
+		 //Displays previous page.
+		
+	
+		function onPrevPage() {
+		  if (pageNum <= 1) {
+			return;
+		  }
+		  pageNum--;
+		  queueRenderPage(pageNum);
+		}
+		document.getElementById('prev').addEventListener('click', onPrevPage);
+	
+		/**
+		 * Displays next page.
+		 */
+		function onNextPage() {
+		  if (pageNum >= pdfDoc.numPages) {
+			return;
+		  }
+		  pageNum++;
+		  queueRenderPage(pageNum);
+		}
+		document.getElementById('next').addEventListener('click', onNextPage);
+
+
   //descargar el pdf de forma asincrona
 
   pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
@@ -76,35 +113,34 @@ var elemento = new Object();
 var elementoActual = null;
 var posicionX = 0;
 var posicionY = 0;
-
+var imagen = new Image();
+imagen.src = './assets/firma.png';
+var textoElemento = 'Arrastre el elemento!';
 // funcion para dibujar elemento para arrastrar
 
 function pintarElemento(valorX,valorY){
 
-  
-  //hacerPdf();
-  //ctx.fillStyle = 'white';
-  //ctx.fillStyle = 'rgba(253,254,254,0.1)';
-  //ctx.fillRect(10,10,500,500);
-  //ctx.globalAlpha = 0.2;
-  //ctx.clearRect(0,0, canvas.width,canvas.height);
-  
   ctx.fillStyle = elemento.color;
   ctx.lineWidth = elemento.anchoBorde;
   ctx.strokeStyle = elemento.borde;
+  ctx.font="bold 20px arial"; //estilo de texto
+  ctx.strokeText(textoElemento,elemento.x, elemento.y);
   ctx.fillRect(elemento.x, elemento.y,elemento.widht,elemento.height);
+  //ctx.drawImage(imagen,elemento.x,elemento.y,elemento.widht,elemento.height);
   ctx.strokeRect(elemento.x, elemento.y,elemento.widht,elemento.height)
+    //console.log('el valor de elemento' + elemento);
+  //console.log('el valor de elementoActual' + elementoActual);
   
 };
 
 //parametros del objeto a pintar 
 elemento = ({
 
-  x:150,
+  x:0,
   y:250,
-  widht:100,
+  widht:250,
   height:100,
-  color:'red',
+  color:'rgba( 254, 255, 255 ,0.1)',
   borde:'rgba( 161, 167, 167 ,0.2)',
   anchoBorde :2
 
@@ -128,10 +164,10 @@ pintarElemento();
     y: Math.round(e.clientY - pos.top)
 
   };
-
+  
  }
 
- //console.log(elemento.y);
+  //console.log(elemento.y);
  
  //funcion para escuchar cuando se haga clic sobre el canvas
 
@@ -185,7 +221,7 @@ canvas.addEventListener("mouseup", ()=>{
 
   elementoActual = null;
   console.log('este es el valor del elementoActual' + elementoActual + 'y este es el valor del elemento inicial' + elemento );
-  elemento.color = 'blue';
+  elemento.color = 'rgb( 106, 206, 224 )';
   console.log ('El valor de Y' + ' ' + elemento.y + ' ' +  'el valor de x' + ' ' + elemento.x);
   
   hacerPdf();
