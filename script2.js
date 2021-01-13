@@ -67,9 +67,8 @@ function hacerPdf (){
 		}
 	
 	
-		 //Displays previous page.
-		
-	
+		 //funcion para ver la pagina anterior
+			
 		function onPrevPage() {
 		  if (pageNum <= 1) {
 			return;
@@ -79,19 +78,18 @@ function hacerPdf (){
 		}
 		document.getElementById('prev').addEventListener('click', onPrevPage);
 	
-		/**
-		 * Displays next page.
-		 */
-		function onNextPage() {
+		//funcion para ver la siguiente pagina
+  
+    function onNextPage() {
 		  if (pageNum >= pdfDoc.numPages) {
 			return;
 		  }
 		  pageNum++;
 		  queueRenderPage(pageNum);
 		}
-		document.getElementById('next').addEventListener('click', onNextPage);
-
-
+    document.getElementById('next').addEventListener('click', onNextPage);
+    
+           
   //descargar el pdf de forma asincrona
 
   pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
@@ -104,8 +102,40 @@ function hacerPdf (){
   });
 }
  hacerPdf();   
+ 
+/*
+ //ELEMENTO ARRASTRABLE
 
-//////DIBUJAR EN EL CANVAS///////
+ const  elemento_arrastrar = document.getElementById('elementoArrastrar');
+ const  elemento_dejar = document.getElementById('elementoDejar');
+
+
+ elemento_arrastrar.addEventListener('dragstart' , (e)=> {
+
+  e.dataTransfer.setData('text/plain',e.target.id)
+    
+
+ })
+
+elemento_dejar.addEventListener('dragover', (e)=>{
+
+  e.preventDefault();
+
+})
+
+
+elemento_dejar.addEventListener('drop',(e)=>{
+
+  e.preventDefault();
+  const element = document.getElementById(e.dataTransfer.getData('text'))
+  element.classList.remove('active');
+  elemento_dejar.appendChild(elemento_arrastrar.removeChild(element))
+  console.log('se ha movido el objeto correctamente');
+
+})
+*/
+
+ //////DIBUJAR EN EL CANVAS///////
 
 var canvas = document.getElementById("the-canvas");
 var ctx = canvas.getContext("2d");

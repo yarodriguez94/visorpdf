@@ -8,7 +8,7 @@
 .container {
 
     display:flex;
-    flex-flow:column nowrap;
+    flex-flow:column wrap;
 
 }
 .container-botones{
@@ -16,107 +16,55 @@
     margin-top:1rem;
     
 }
-.container-canvas{
-
-    width:100%;
-    height:auto;
-    margin:auto;
-    /*background-color: rgba(61, 212, 137, 0.5);
-    z-index:1;*/
-
-}
-    
-    #the-canvas {
-                
-        border:solid 1px  purple;
-           
-    }
-
-
+/*
 body {
     
     text-align:center;
 
-}
+}*/
+.container-arrastrar {
 
-.container-elemento{
-
-    width:130px;
-    height:100%;
-    border:solid 1px black;
-    background-color:blueviolet;
-    position: fixed;
+    width:100px;
+    height: 600px;
+    background-color:blue;
     display:flex;
-    align-items: center;
-    justify-content: center;
+    /*z-index:50;*/
 
 
 }
-    .container-elemento-arrastrar{
+   .arrastrar-elemento{
 
-        width:50px;
+        width:150px;
         height:50px;
-        background-color:blue;
-        z-index:1;
-
+        background-color:blueviolet;
+        position:fixed;
+        
 
     }
-.canvas{
-
-    /*background-color: rgba(150, 100,50, .5);
-    z-index:20;*/
-
-}
-
-.arrastrar {
-
-    position: fixed;
-
-}
-
-.caja{
-
-    width:200px;
-    height:100px;
-    background-color:blue;
-
-}
-/*
-.firma {
-
-    width: 100px;
-    height:100%;
-    border:solid 1px;
-    position: fixed;
-    background-color:blueviolet;
-    /*display:flex;
-    flex-direction: row;
-    flex-wrap:nowrap;
-    float:left;
-    align-items: center;
-    justify-content: center;
-    background-color: aqua;
-    margin-top:0px;
-    z-index: 1;
+.canvas-container-elemento{
+    
+    
+    width:400px;
+    height: 200px;
+    text-align:center;
+    background-color:rgba(100,   255, 196, 0.5);
     
 
 }
-.container-firma-elemento {
 
-    width:80%;
-    height: 25px;
-    background-color: darkblue;
-        
+.elementCanvas{
 
+    /*z-index:-20;*/
+    position: relative;
+    
 }
 
-.container-destino-firma{
+.elementCanvas{
 
     width:100px;
-    height: 50px;
-    border:solid 1px;
-    background-color: blueviolet;
-    z-index: 1;
+    height: 100px;
+    background-color:black;
+
 
 }
-*/
+

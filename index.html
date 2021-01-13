@@ -9,27 +9,41 @@
 </head>
 <body>
 
-	<div class="container">
 	
-		<div class="container-botones">
+
+		<div class="container-arrastrar" id="elementoArrastrar">
+
+			<div class="arrastrar-elemento" id="elemento" draggable="true"></div>
+
+		</div>
+	
+		<!--<div class="container-botones">
 			
 			<button id="prev">Anterior</button>
 			<button id="next">Siguiente</button>
 			<span>Página: <span id="page_num"></span> / <span id="page_count"></span></span>
 					
+		</div>-->
+
+		<div class="canvas-container-elemento" id="elementoDejar">
+
+			<div id="the-canvas" class="elementoCanvas"></div>
+
+			<!--<canvas id="the-canvas" class="elementCanvas"></canvas>-->
+
 		</div>
 
-			
-		<div  id="elemento-soltar" class="container-canvas">
+
+	<script src="script2.js"></script>
+	
+				
+		<!--<div  id="elemento-soltar" class="container-canvas">
 			
 				<canvas id="the-canvas" class="canvas" width="900" height="650"></canvas>
 
 			<canvas id="elementoArrastrar" class="arrastrar"> </canvas>
 
-		</div>
-	</div>
-
-	<script src="script2.js"></script>
+		</div>-->
 	
 </body>
 </html>
