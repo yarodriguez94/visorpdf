@@ -8,7 +8,7 @@
 .container {
 
     display:flex;
-    flex-flow:column wrap;
+    flex-flow:column nowrap;
 
 }
 .container-botones{
@@ -16,55 +16,107 @@
     margin-top:1rem;
     
 }
-/*
+.container-canvas{
+
+    width:100%;
+    height:auto;
+    margin:auto;
+    /*background-color: rgba(61, 212, 137, 0.5);
+    z-index:1;*/
+
+}
+    
+    #the-canvas {
+                
+        border:solid 1px  purple;
+        
+           
+    }
+
+
 body {
     
     text-align:center;
 
-}*/
-.container-arrastrar {
+}
 
-    width:100px;
-    height: 600px;
-    background-color:blue;
+.container-elemento{
+
+    width:130px;
+    height:100%;
+    border:solid 1px black;
+    background-color:blueviolet;
+    position: fixed;
     display:flex;
-    /*z-index:50;*/
+    align-items: center;
+    justify-content: center;
 
 
 }
-   .arrastrar-elemento{
+    .container-elemento-arrastrar{
 
-        width:150px;
+        width:50px;
         height:50px;
-        background-color:blueviolet;
-        position:fixed;
-        
+        background-color:blue;
+        z-index:1;
+
 
     }
-.canvas-container-elemento{
-    
-    
-    width:400px;
-    height: 200px;
-    text-align:center;
-    background-color:rgba(100,   255, 196, 0.5);
-    
+.canvas{
+
+    /*background-color: rgba(150, 100,50, .5);
+    z-index:20;*/
 
 }
 
-.elementCanvas{
+.arrastrar {
 
-    /*z-index:-20;*/
-    position: relative;
-    
+    position: fixed;
+
 }
 
-.elementCanvas{
+.caja{
 
+    width:200px;
+    height:100px;
+    background-color:blue;
+
+}
+/*
+.container-principal {
+
+
+    overflow: scroll;
+}*/
+/*
+.firma {
+    width: 100px;
+    height:100%;
+    border:solid 1px;
+    position: fixed;
+    background-color:blueviolet;
+    /*display:flex;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    float:left;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    margin-top:0px;
+    z-index: 1;
+    
+}
+.container-firma-elemento {
+    width:80%;
+    height: 25px;
+    background-color: darkblue;
+        
+}
+.container-destino-firma{
     width:100px;
-    height: 100px;
-    background-color:black;
-
-
+    height: 50px;
+    border:solid 1px;
+    background-color: blueviolet;
+    z-index: 1;
 }
-
+*/

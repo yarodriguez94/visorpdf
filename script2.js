@@ -21,7 +21,7 @@ function hacerPdf (){
   *@param num Page Number.
   */
 
-  //Esta funcion renderiza el PDF para mostrarlo
+  //Funcion para renderizar el PDF y mostrarlo
   function renderPage(num) {
     pageRendering = true;
 
@@ -32,7 +32,7 @@ function hacerPdf (){
       canvas.height = viewport.height;
       canvas.width = viewport.width;
 
-      //Se crea un objeto para renderizar la pagina del Pdf
+      //Se crea un objeto para renderizar la pagina del Pdf en el viewport 
 
       var renderContext = {
           canvasContext: ctx,
@@ -74,7 +74,8 @@ function hacerPdf (){
 			return;
 		  }
 		  pageNum--;
-		  queueRenderPage(pageNum);
+      queueRenderPage(pageNum);
+      //console.log('este es el numero de pagina'+ pageNum);
 		}
 		document.getElementById('prev').addEventListener('click', onPrevPage);
 	
@@ -85,23 +86,42 @@ function hacerPdf (){
 			return;
 		  }
 		  pageNum++;
-		  queueRenderPage(pageNum);
+      queueRenderPage(pageNum);
+      
+      //console.log('este es el numero de pagina'+ pageNum);
 		}
     document.getElementById('next').addEventListener('click', onNextPage);
     
            
   //descargar el pdf de forma asincrona
+  numPage = null;
 
   pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-    pdfDoc = pdfDoc_;
-    document.getElementById('page_count').textContent = pdfDoc.numPages;
+  pdfDoc = pdfDoc_;
+  document.getElementById('page_count').textContent = pdfDoc.numPages;
 
     //iniciar la primera pagina
-
-  renderPage(pageNum);
+       
+    renderPage(pageNum+1);     
+    
+ 
   });
+
+  /*renderPage(pageNum+1);
+  var botonAtras = document.getElementById('prev');
+    botonAtrasEvent = botonAtras.addEventListener('mousedown',() =>{
+
+    var numPage = null;
+    console.log('Se ha entrado al evento , y el valor de numPage es' + pageNum);
+
+      numPage = pageNum;
+    
+
+    });*/
+
 }
  hacerPdf();   
+ 
  
 /*
  //ELEMENTO ARRASTRABLE
@@ -135,6 +155,25 @@ elemento_dejar.addEventListener('drop',(e)=>{
 })
 */
 
+//hacer scroll dentro del canvas
+/*
+var width = window.innerWidth;
+var height = window.innerHeight;
+
+var estado = new Konva.Stage ({
+
+  container: 'elementoDejar',
+  widht : width,
+  height : height,
+  dragabble: true,
+});
+
+var capa = new Konva.Layer ();
+estado.add(capa);
+
+estado.draw();*/
+
+
  //////DIBUJAR EN EL CANVAS///////
 
 var canvas = document.getElementById("the-canvas");
@@ -146,9 +185,10 @@ var posicionY = 0;
 var imagen = new Image();
 imagen.src = './assets/firma.png';
 var textoElemento = 'Arrastre el elemento!';
+
 // funcion para dibujar elemento para arrastrar
 
-function pintarElemento(valorX,valorY){
+function pintarElemento(){
 
   ctx.fillStyle = elemento.color;
   ctx.lineWidth = elemento.anchoBorde;
@@ -158,8 +198,6 @@ function pintarElemento(valorX,valorY){
   ctx.fillRect(elemento.x, elemento.y,elemento.widht,elemento.height);
   //ctx.drawImage(imagen,elemento.x,elemento.y,elemento.widht,elemento.height);
   ctx.strokeRect(elemento.x, elemento.y,elemento.widht,elemento.height)
-    //console.log('el valor de elemento' + elemento);
-  //console.log('el valor de elementoActual' + elementoActual);
   
 };
 
@@ -209,7 +247,7 @@ pintarElemento();
       && elemento.y < mousePos.y) && (elemento.height + elemento.y > mousePos.y)
      ){
   
-      console.log("se ha encontrado el elemento");
+      //console.log("se ha encontrado el elemento");
 
       elementoActual = elemento;
       posicionX = mousePos.x - elemento.x;
@@ -232,10 +270,13 @@ function pintarElementoMouse (){
   if(elementoActual !=null){
 
     var mousePos = onMousePos(canvas, e);  
-    console.log("entro al condicional del mousemove");
+    //console.log("entro al condicional del mousemove");
     elementoActual.x = mousePos.x - posicionX;
     elementoActual.y = mousePos.y - posicionY;
-    
+
+    var scrollY = elementoActual.y;
+    var scrollX = elementoActual.x;
+    window.scroll(scrollX,scrollY);
     //pintarElemento();
     elementoActual.color = 'rgba(255, 255,255, 0.0)';
    }
@@ -250,12 +291,12 @@ pintarElementoMouse();
 canvas.addEventListener("mouseup", ()=>{
 
   elementoActual = null;
-  console.log('este es el valor del elementoActual' + elementoActual + 'y este es el valor del elemento inicial' + elemento );
+  //console.log('este es el valor del elementoActual' + elementoActual + 'y este es el valor del elemento inicial' + elemento );
   elemento.color = 'rgb( 106, 206, 224 )';
-  console.log ('El valor de Y' + ' ' + elemento.y + ' ' +  'el valor de x' + ' ' + elemento.x);
+  //console.log ('El valor de Y' + ' ' + elemento.y + ' ' +  'el valor de x' + ' ' + elemento.x);
   
   hacerPdf();
  
 })
 
-window.onload = pintarElemento();
+//window.onload = pintarElemento();
