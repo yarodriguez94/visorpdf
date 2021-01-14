@@ -1,13 +1,11 @@
 //Colocar archivo pdf en el canvas
 
-function hacerPdf (){
-  //variable con ruta del archivo
-  var url = './assets/fabio.pdf';
+ //variable con ruta del archivo
+var url = './assets/fabio.pdf';
 
-  //Cargar script para acceder  al archivo de PDF.js.
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+ //Cargar script para acceder  al archivo de PDF.js.
+ pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
-  //crear las variables de entorno para rendereizar el archivo pdf asi como la paginacion
   var pdfDoc = null,
   pageNum = 1,
   pageRendering = false,
@@ -16,23 +14,18 @@ function hacerPdf (){
   canvas = document.getElementById('the-canvas'),
   ctx = canvas.getContext('2d');
 
-  /**Obtener información de la página del documento
-  *
-  *@param num Page Number.
-  */
-
   //Funcion para renderizar el PDF y mostrarlo
   function renderPage(num) {
     pageRendering = true;
 
-    //Se usa una promesa para recuperar la pagina
+    //Se usa una promesa para tomar la  primera pagina y declarar el tamaño del pdf dentro del canvas
 
     pdfDoc.getPage(num).then(function(page) {
       var viewport = page.getViewport({scale: scale});
       canvas.height = viewport.height;
       canvas.width = viewport.width;
 
-      //Se crea un objeto para renderizar la pagina del Pdf en el viewport 
+      //Se crean las propiedades del contexto para renderizar el pdf en el viewport 
 
       var renderContext = {
           canvasContext: ctx,
@@ -40,38 +33,43 @@ function hacerPdf (){
       };
       var renderTask = page.render(renderContext);
 
-      //Esperar hasta que se termine el renderizado
+      //Promesa para renderizar el documento pdf
 
       renderTask.promise.then(function() {
           pageRendering = false;
           if (pageNumPending !== null) {
-            // La nueva representación de la página está pendiente
+            
             renderPage(pageNumPending);
             pageNumPending = null;
           }
       });
     });
-    //Actualizar el contador de  las paginas
+    //Mostrar la primera pagina
     document.getElementById('page_num').textContent = num;
+    
   }
-
-  //poder visualizar las demas paginas
-
-  
-		function queueRenderPage(num) {
+    
+  //funcion para validar la pagina actual 
+  	function queueRenderPage(num) {
 		  if (pageRendering) {
-			pageNumPending = num;
-		  } else {
-			renderPage(num);
-		  }
+    
+        pageNumPending = num;
+
+  	  } else {
+     
+        renderPage(num);
+      
+      }
+    
 		}
-	
-	
+		
 		 //funcion para ver la pagina anterior
 			
 		function onPrevPage() {
 		  if (pageNum <= 1) {
-			return;
+      
+        return;
+
 		  }
 		  pageNum--;
       queueRenderPage(pageNum);
@@ -82,47 +80,60 @@ function hacerPdf (){
 		//funcion para ver la siguiente pagina
   
     function onNextPage() {
-		  if (pageNum >= pdfDoc.numPages) {
-			return;
+      
+      if (pageNum >= pdfDoc.numPages) {
+  
+        return;
+
 		  }
 		  pageNum++;
       queueRenderPage(pageNum);
       
-      //console.log('este es el numero de pagina'+ pageNum);
-		}
+   	}
+    
     document.getElementById('next').addEventListener('click', onNextPage);
     
-           
-  //descargar el pdf de forma asincrona
-  numPage = null;
+    //descargar el pdf de forma asincrona
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+      
+      pdfDoc = pdfDoc_;
+      document.getElementById('page_count').textContent = pdfDoc.numPages;
 
-  pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-  pdfDoc = pdfDoc_;
-  document.getElementById('page_count').textContent = pdfDoc.numPages;
+      var botonAtras = document.getElementById('prev');
+      var botonAdelante = document.getElementById('next');
+      botonAtrasEvent = botonAtras.addEventListener('click',() =>{
 
-    //iniciar la primera pagina
-       
-    renderPage(pageNum+1);     
-    
- 
-  });
-
-  /*renderPage(pageNum+1);
-  var botonAtras = document.getElementById('prev');
-    botonAtrasEvent = botonAtras.addEventListener('mousedown',() =>{
-
-    var numPage = null;
-    console.log('Se ha entrado al evento , y el valor de numPage es' + pageNum);
+      var numPage = null;
 
       numPage = pageNum;
-    
 
-    });*/
+      });
 
-}
- hacerPdf();   
- 
- 
+      botonAdelanteEvent = botonAdelante.addEventListener('clic',()=>{
+
+        numPage = pageNum;
+
+      })
+
+      if (botonAtrasEvent){
+
+        renderPage(numPage); 
+        console.log('entro en el primer condicional');
+
+      }else if (botonAdelanteEvent) {
+
+        renderPage(pageNum);
+        console.log('entro en el segundo condicional');
+
+      }else {
+
+        renderPage(pageNum);
+        console.log('entro en el ultimo condicional' + pageNum);
+      }
+   
+    });
+//}
+  
 /*
  //ELEMENTO ARRASTRABLE
 
@@ -193,7 +204,7 @@ function pintarElemento(){
   ctx.fillStyle = elemento.color;
   ctx.lineWidth = elemento.anchoBorde;
   ctx.strokeStyle = elemento.borde;
-  ctx.font="bold 20px arial"; //estilo de texto
+  ctx.font="bold 20px Arial"; //estilo de texto
   ctx.strokeText(textoElemento,elemento.x, elemento.y);
   ctx.fillRect(elemento.x, elemento.y,elemento.widht,elemento.height);
   //ctx.drawImage(imagen,elemento.x,elemento.y,elemento.widht,elemento.height);
@@ -207,14 +218,13 @@ elemento = ({
   x:0,
   y:250,
   widht:250,
-  height:100,
+  height:70,
   color:'rgba( 254, 255, 255 ,0.1)',
-  borde:'rgba( 161, 167, 167 ,0.2)',
+  borde:'rgba( 231, 139, 139 ,0.1)',
   anchoBorde :2
 
 });
 
-//elemento.color= 'black';
 
 //llamar a la funcion para pintar el objeto
 pintarElemento();
@@ -235,8 +245,6 @@ pintarElemento();
   
  }
 
-  //console.log(elemento.y);
- 
  //funcion para escuchar cuando se haga clic sobre el canvas
 
  canvas.addEventListener("mousedown", function(e) {
@@ -255,8 +263,6 @@ pintarElemento();
   
    }
    
-   //elemento.x = mousePos.x;
-   //elemento.y = mousePos.y;
    pintarElemento();
  });
 
@@ -270,7 +276,6 @@ function pintarElementoMouse (){
   if(elementoActual !=null){
 
     var mousePos = onMousePos(canvas, e);  
-    //console.log("entro al condicional del mousemove");
     elementoActual.x = mousePos.x - posicionX;
     elementoActual.y = mousePos.y - posicionY;
 
@@ -291,12 +296,8 @@ pintarElementoMouse();
 canvas.addEventListener("mouseup", ()=>{
 
   elementoActual = null;
-  //console.log('este es el valor del elementoActual' + elementoActual + 'y este es el valor del elemento inicial' + elemento );
-  elemento.color = 'rgb( 106, 206, 224 )';
-  //console.log ('El valor de Y' + ' ' + elemento.y + ' ' +  'el valor de x' + ' ' + elemento.x);
+  elemento.color = 'rgb( 254, 255, 255 )';
+    
+  renderPage(pageNum);
   
-  hacerPdf();
- 
 })
-
-//window.onload = pintarElemento();
