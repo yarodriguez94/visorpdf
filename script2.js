@@ -1,7 +1,7 @@
 //Colocar archivo pdf en el canvas
 
  //variable con ruta del archivo
-var url = './assets/fabio.pdf';
+  var url = './assets/anexo.pdf';
 
  //Cargar script para acceder  al archivo de PDF.js.
  pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
@@ -132,7 +132,6 @@ var url = './assets/fabio.pdf';
       }
    
     });
-//}
   
 /*
  //ELEMENTO ARRASTRABLE
@@ -166,25 +165,6 @@ elemento_dejar.addEventListener('drop',(e)=>{
 })
 */
 
-//hacer scroll dentro del canvas
-/*
-var width = window.innerWidth;
-var height = window.innerHeight;
-
-var estado = new Konva.Stage ({
-
-  container: 'elementoDejar',
-  widht : width,
-  height : height,
-  dragabble: true,
-});
-
-var capa = new Konva.Layer ();
-estado.add(capa);
-
-estado.draw();*/
-
-
  //////DIBUJAR EN EL CANVAS///////
 
 var canvas = document.getElementById("the-canvas");
@@ -215,7 +195,7 @@ function pintarElemento(){
 //parametros del objeto a pintar 
 elemento = ({
 
-  x:0,
+  x:5,
   y:250,
   widht:250,
   height:70,
@@ -301,3 +281,12 @@ canvas.addEventListener("mouseup", ()=>{
   renderPage(pageNum);
   
 })
+
+/*.catch (err => {
+
+  console.log('No se puede cargar el documento');
+
+
+
+
+})*/

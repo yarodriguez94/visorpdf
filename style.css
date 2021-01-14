@@ -5,118 +5,59 @@
     box-sizing: border-box;
 
 }
-.container {
+.body {
 
-    display:flex;
-    flex-flow:column nowrap;
+    background-color: #c1baba;
 
 }
-.container-botones{
+/*.container-botones{
 
     margin-top:1rem;
     
-}
-.container-canvas{
+}*/
+.canvas-container-elemento{
 
-    width:100%;
-    height:auto;
-    margin:auto;
-    /*background-color: rgba(61, 212, 137, 0.5);
-    z-index:1;*/
+    background-color: #646363;
+    padding:1rem;
+    text-align:center;
 
+    
 }
     
     #the-canvas {
                 
-        border:solid 1px  purple;
+        border:solid 1px  black;
         
            
     }
+.container-botones {
 
-
-body {
-    
+    width:100%;
+    height: 50px;
     text-align:center;
-
-}
-
-.container-elemento{
-
-    width:130px;
-    height:100%;
-    border:solid 1px black;
-    background-color:blueviolet;
-    position: fixed;
-    display:flex;
+    background-color:#646363;
+    display: flex;
+    flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-
+    
 
 }
-    .container-elemento-arrastrar{
+    #prev,#next {
 
-        width:50px;
-        height:50px;
-        background-color:blue;
-        z-index:1;
+        
+        width:100px;
+        height: 40px;
+        padding:0.5rem;
+        background-color:#476acf ;
+        border-radius: 7px;
 
 
     }
-.canvas{
 
-    /*background-color: rgba(150, 100,50, .5);
-    z-index:20;*/
-
-}
-
-.arrastrar {
-
-    position: fixed;
-
-}
-
-.caja{
-
-    width:200px;
-    height:100px;
-    background-color:blue;
-
-}
-/*
-.container-principal {
-
-
-    overflow: scroll;
-}*/
-/*
-.firma {
-    width: 100px;
-    height:100%;
-    border:solid 1px;
-    position: fixed;
-    background-color:blueviolet;
-    /*display:flex;
-    flex-direction: row;
-    flex-wrap:nowrap;
-    float:left;
-    align-items: center;
-    justify-content: center;
-    background-color: aqua;
-    margin-top:0px;
-    z-index: 1;
+/*body {
     
-}
-.container-firma-elemento {
-    width:80%;
-    height: 25px;
-    background-color: darkblue;
-        
-}
-.container-destino-firma{
-    width:100px;
-    height: 50px;
-    border:solid 1px;
-    background-color: blueviolet;
-    z-index: 1;
-}
-*/
+    text-align:center;
+
+}*/
+
