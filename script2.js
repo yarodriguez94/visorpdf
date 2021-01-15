@@ -128,9 +128,9 @@
       }else {
 
         renderPage(pageNum);
-        console.log('entro en el ultimo condicional' + pageNum);
+       // console.log('entro en el ultimo condicional' + pageNum);
       }
-   
+  
     });
   
 /*
@@ -184,7 +184,7 @@ function pintarElemento(){
   ctx.fillStyle = elemento.color;
   ctx.lineWidth = elemento.anchoBorde;
   ctx.strokeStyle = elemento.borde;
-  ctx.font="bold 20px Arial"; //estilo de texto
+  ctx.font="25px sant-serif"; //estilo de texto
   ctx.strokeText(textoElemento,elemento.x, elemento.y);
   ctx.fillRect(elemento.x, elemento.y,elemento.widht,elemento.height);
   //ctx.drawImage(imagen,elemento.x,elemento.y,elemento.widht,elemento.height);
@@ -200,7 +200,8 @@ elemento = ({
   widht:250,
   height:70,
   color:'rgba( 254, 255, 255 ,0.1)',
-  borde:'rgba( 231, 139, 139 ,0.1)',
+  //borde:'rgba( 231, 139, 139 ,0.1)',
+  borde:'rgba( 111, 115, 125 ,0.1)',
   anchoBorde :2
 
 });
@@ -279,14 +280,16 @@ canvas.addEventListener("mouseup", ()=>{
   elemento.color = 'rgb( 254, 255, 255 )';
     
   renderPage(pageNum);
-  
-})
+
+  var valorejex = elemento.x;
+  var valorejey = elemento.y;
+  console.log(` El valor del eje x ${valorejex} valor del eje y ${valorejey}`);
+
+});
 
 /*.catch (err => {
 
   console.log('No se puede cargar el documento');
-
-
 
 
 })*/
