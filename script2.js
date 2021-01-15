@@ -1,7 +1,7 @@
 //Colocar archivo pdf en el canvas
 
  //variable con ruta del archivo
-  var url = './assets/anexo.pdf';
+  var url = './assets/ssanexo.pdf';
 
  //Cargar script para acceder  al archivo de PDF.js.
  pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
@@ -48,6 +48,7 @@
     document.getElementById('page_num').textContent = num;
     
   }
+  
     
   //funcion para validar la pagina actual 
   	function queueRenderPage(num) {
@@ -131,7 +132,21 @@
        // console.log('entro en el ultimo condicional' + pageNum);
       }
   
-    });
+    })
+    .catch( err => {
+
+      var div = document.createElement('div');
+      //var divContainer =  document.getElementById('elementoDejar').parentNode;
+      //var divContainerInsertar = document.getElementById('elementoDejar');
+      //divContainer.insertBefore(div,divContainerInsertar);
+      div.className = 'error';
+      div.appendChild(document.createTextNode(err.message));
+      document.querySelector('#elementoDejar').insertBefore(div,canvas);
+
+      document.querySelector('.container-botones').style.display = 'none';
+      //document.querySelector('.canvas-container-elemento').style.display = 'none';
+
+    } )
   
 /*
  //ELEMENTO ARRASTRABLE
@@ -268,7 +283,7 @@ function pintarElementoMouse (){
    }
  
    pintarElemento();
-    
+      
  });
 }
 pintarElementoMouse();
@@ -286,10 +301,3 @@ canvas.addEventListener("mouseup", ()=>{
   console.log(` El valor del eje x ${valorejex} valor del eje y ${valorejey}`);
 
 });
-
-/*.catch (err => {
-
-  console.log('No se puede cargar el documento');
-
-
-})*/

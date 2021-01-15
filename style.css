@@ -76,3 +76,11 @@
 
     }
 
+    .error {
+
+        background-color:rgba(226, 19, 19, 0.5);
+        color:white;
+        padding:1rem;
+
+    }
+
